@@ -36,7 +36,7 @@ Products
                 </div>
                 @if($brandID)
                 <input type="hidden" name="brand_id" value="{{$brandID}}"/>
-                @else    
+                @else
                 <div class="form-group">
                     <label class="col-sm-3 col-lg-2 control-label">Select Brand</label>
                     <div class="col-sm-9 col-sm-10 controls">
@@ -69,19 +69,13 @@ Products
                 <div class="form-group">
                     <label class="col-sm-3 col-lg-2 control-label">Show that product at date :</label>
                     <div class="col-sm-5 col-lg-3 controls">
-                        <div class="input-group date date-picker" data-date="\Carbon\Carbon::now()->format('d/m/Y')" data-date-format="dd/mm/yyyy" data-date-viewmode="years">
-                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>                               
                             {!! Form::text('show_date',\Carbon\Carbon::now()->format('d/m/Y'),['class'=>'form-control date-picker','required' => 'required', 'size'=>'16','data-date-format'=>'dd/mm/yyyy']) !!}
-                        </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-3 col-lg-2 control-label">Expire date  :</label>
                     <div class="col-sm-5 col-lg-3 controls">
-                        <div class="input-group date date-picker" data-date="\Carbon\Carbon::now()->format('d/m/Y')" data-date-format="dd/mm/yyyy" data-date-viewmode="years">
-                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>                               
                             {!! Form::text('expire_date',\Carbon\Carbon::tomorrow()->format('d/m/Y'),['class'=>'form-control date-picker','required' => 'required', 'size'=>'16','data-date-format'=>'dd/mm/yyyy']) !!}
-                        </div>
                     </div>
                 </div>
                 <div class="form-group">

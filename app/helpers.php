@@ -97,6 +97,8 @@ function get_static_routes()
         Route::get('content/allData', 'ContentController@allData');
         Route::get('post/allData', 'PostController@allData');
         // Route::resource('provider', 'ProviderController');
+        Route::get('products/deleteOld', 'ProductsController@getDeleteOld');
+        Route::post('products/deleteOld', 'ProductsController@postDeleteOld');
         Route::resource('products', 'ProductsController');
         Route::get('products/{id}/posts', 'ProductsController@get_posts');
         Route::get('productsPatch/create', 'ProductsController@createPatch');

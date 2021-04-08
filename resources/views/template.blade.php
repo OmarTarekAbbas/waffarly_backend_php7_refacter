@@ -484,7 +484,7 @@ function ConfirmDelete()
                     </ul>
                     @endif
 
-                    @if (get_action_icons('content', 'get'))
+                    @if (get_action_icons('products', 'get'))
                     <ul class="nav nav-list">
                         <li id="product">
                             <a href="#" class="dropdown-toggle">
@@ -497,6 +497,9 @@ function ConfirmDelete()
                             <ul class="submenu">
                                 <li id="product_index"><a href="{{url('products')}}">List Products </a></li>
                                 <li id="product_create"><a href="{{url('products/create')}}">Create Product</a></li>
+                                <li id="product-patch"><a href="{{url('productsPatch/create')}}">Add Product Patch</a></li>
+                                <li id="product-delete"><a href="{{url('products/deleteOld')}}">Archive Old Products</a></li>
+
                             </ul>
                         </li>
                     </ul>

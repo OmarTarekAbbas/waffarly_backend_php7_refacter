@@ -9,7 +9,6 @@ use App\Http\Requests\ProductRequest;
 use App\Product;
 use Carbon\Carbon;
 use Datatables;
-use Excel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Validator;
@@ -237,6 +236,7 @@ class ProductsController extends Controller
 
         $date = date_create_from_format('d/m/Y', $request->form_date);
         $products = Product::where('show_date', '<=', $date)->get();
+        // dd($products);
         foreach ($products as $product) {
             if (file_exists($product['product_image']))
             //  Storage::delete($product['product_image']);
@@ -270,7 +270,7 @@ class ProductsController extends Controller
         }
         //read file
         $path = $request->file('file')->getRealPath();
-        $data = Excel::load($path, function ($reader) {
+        $data = \Excel::load($path, function ($reader) {
 
         })->get();
         if (!empty($data) && $data->count()) {
@@ -303,7 +303,7 @@ class ProductsController extends Controller
 
     public function template_excel()
     {
-        Excel::create('ImportTemplate', function ($excel) {
+        \Excel::create('ImportTemplate', function ($excel) {
 
             // Set the title
             $excel->setTitle('Import Template File');
