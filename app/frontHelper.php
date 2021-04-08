@@ -4,6 +4,8 @@ use App\Setting;
 use App\Category;
 use App\Provider;
 use App\Content;
+use App\Country;
+use App\Operator;
 
 if (! function_exists('setting')) {
     /**
@@ -50,3 +52,14 @@ function general_service() {
     }
     return $generalService;
 }
+
+function Etisalat(){
+    $country = Country::where('title', 'egypt')->first();
+    if(!empty($country)){
+        $op = Operator::where('country_id', $country->id)->where('name', 'etisalat')->first();
+        if(!empty($op)){
+            return $op->id;
+        }
+    }
+    return 4;
+  }

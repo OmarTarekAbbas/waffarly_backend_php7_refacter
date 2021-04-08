@@ -18,13 +18,13 @@ get_dynamic_routes();
 Route::group(['middleware' => 'front'], function () {
 Route::get('/', 'FrontEndController@index')->name('home');
 Route::get('home', 'FrontEndController@index')->name('home');
-Route::get('brand', 'FrontEndController@get_brand_products')->name('brand');
-Route::get('category', 'FrontEndController@products_by_category')->name('category');
-Route::get('product', 'FrontEndController@get_product')->name('product');
+Route::get('category/{id}', 'FrontEndController@products_by_category')->name('category');
+Route::get('brand/{id}', 'FrontEndController@get_brand_products')->name('brand');
+Route::get('product/{id}', 'FrontEndController@get_product')->name('product');
 Route::get('search', 'FrontEndController@search_view')->name('search');
 Route::get('search_result', 'FrontEndController@search');
 Route::get('terms', 'DuController@terms')->name('terms');
 });
 
-
-define('Etisalat_Bundle_Route','4');
+// constant
+define('Etisalat_Bundle_Route',Etisalat()); // OpID=4

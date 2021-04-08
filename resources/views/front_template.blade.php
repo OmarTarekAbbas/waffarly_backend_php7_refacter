@@ -54,8 +54,12 @@
     <meta content="yes" name="apple-mobile-web-app-capable">
     <meta content="yes" name="apple-touch-fullscreen">
     <link rel="stylesheet" type="text/css" href="{{url('css/bootstrap.css')}}">
+    @if (request()->get('OpID') == Etisalat_Bundle_Route)
+    <link rel="stylesheet" type="text/css" href="{{url('css/home.css')}}">
+    @else
     <link rel="stylesheet" type="text/css" href="{{url('css/home.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url('css/du_home.css')}}">
+    @endif
 
 
 
@@ -219,9 +223,9 @@
             <span class="phone_subscriber">{{ Session::get('phone_number') }}</span>
                 @endif -->
 
-                <li><a href="{{url('/')}}"><i class="fa fa-dashboard"></i> الرئيسية</a></li>
+                <li><a href="{{url('/')}}" class="link_href"><i class="fa fa-dashboard"></i> الرئيسية</a></li>
                 @if(Session::has('MSISDN_ETISALAT'))
-                    <li class=""><a href="#0"><i class="fa fa-user"></i>{{session('MSISDN_ETISALAT')}}</a></li>
+                    <li class=""><a href="#0" class="link_href"><i class="fa fa-user"></i>{{session('MSISDN_ETISALAT')}}</a></li>
                 @endif
             <li>
                 <a class="collapsible-header"><i class="fa fa-shopping-bag"></i> التصنيفات <span
@@ -232,7 +236,7 @@
 
                                 @foreach($categories as $category)
                                     <li><a
-                                            href="{{url('get_category?category_id='.$category->id)}}">{{$category->category_name}}</a>
+                                            href="{{route('category' , ['id' => $category->id])}}" class="link_href">{{$category->title}}</a>
                                     </li>
                                 @endforeach
 
@@ -249,7 +253,7 @@
                         @foreach($brands as $val)
                             <li class="brand-item separator-right separator-bottom">
                                 <div class="brand-title">
-                                    <a href="{{'get_brand?brand_id='.$val->id}}" class="brand-title_reduced">{{$val->brand_name}}</a>
+                                    <a href="{{route('brand' , ['id' => $val->id])}}" class="brand-title_reduced link_href">{{$val->brand_name}}</a>
                                 </div>
                             </li>
                         @endforeach
@@ -260,11 +264,11 @@
             <li>
                 <div class="line-separator"></div>
             </li>
-            <li><a href="{{url('terms')}}"><i class="fa fa-edit"></i> الارشادات</a></li>
+            <li><a href="{{route('terms')}}" class="link_href"><i class="fa fa-edit"></i> الارشادات</a></li>
             @if (Session::has('MSISDN_ETISALAT') && Session::get('Status') == 'active')
-                <li><a href="{{url('logout_web')}}"><i class="fa fa-sign-out"></i> خروج</a></li>
+                <li><a href="{{url('logout_web')}}" class="link_href"><i class="fa fa-sign-out"></i> خروج</a></li>
             @else
-                <li><a href="{{url(Etisalat_Bundle_Route .'/login_web')}}"><i class="fa fa-sign-in"></i> دخول</a></li>
+                <li><a href="{{url(Etisalat_Bundle_Route .'/login_web')}}" class="link_href"><i class="fa fa-sign-in"></i> دخول</a></li>
             @endif
         </ul>
     </div>
@@ -321,6 +325,24 @@
 
         });
     });
+</script>
+
+<script>
+   op_id = {{ isset($_REQUEST['OpID']) ? 1 : 0 }}
+   if (op_id) {
+     var operator_id = {{ isset($_REQUEST['OpID']) ? $_REQUEST['OpID'] : '' }}
+     $('.link_href').each(function() {
+       console.log($(this));
+       var $this = $(this);
+       var _href = $this.attr("href");
+          if (_href.includes('?')) {
+            $this.attr("href", _href + '&OpID=' + operator_id);
+          } else {
+            $this.attr("href", _href + '?OpID=' + operator_id);
+          }
+        });
+      }
+
 </script>
 
 </body>

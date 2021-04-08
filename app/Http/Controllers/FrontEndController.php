@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Bin;
 use App\Brand;
+use App\Category;
 use App\DuIntgration;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\Controller;
@@ -33,14 +34,10 @@ class FrontEndController extends Controller
     public $customerAccountNumber = "customer159635721";
     private $status = "live";
 
-
-
-
-
     public function index(Request $request)
     {
-        $brands = $this->join_all_table($request)->get();
-        $categories = $this->join_all_table($request)->get();
+        $brands = Brand::all();
+        $categories = Category::all();
         $products = $this->join_all_table($request)->get();
         if ($request->has('OpID')) {
             $featured = $this->join_all_table($request)->orderBy('posts.updated_at', 'DESC')->take(3)->get();
@@ -50,21 +47,10 @@ class FrontEndController extends Controller
         return view('front_end.home', compact('products', 'featured', 'request', 'brands', 'categories'));
     }
 
-
-
-
-
-
-
-
-
-
-
-
     public function join_all_table(Request $request)
     {
         if ($request->has('OpID')) {
-            $products = Post::select('posts.*', 'brands.*', 'categories.*', 'products.*', 'brands.image AS image_brand', 'categories.image AS image_category', 'products.id AS id', 'posts.id AS post_id', 'brands.id AS brand_id', 'categories.id AS category_id')
+            $products = Post::select('posts.*', 'brands.*', 'categories.*', 'products.*', 'brands.image AS image_brand', 'categories.image AS image_category', 'products.id AS id', 'posts.id AS post_id', 'brands.id AS brand_id', 'categories.id AS category_id', 'categories.title AS category_name')
                 ->join('operators', 'posts.operator_id', '=', 'operators.id')
                 ->join('products', 'posts.product_id', '=', 'products.id')
                 ->join('brands', 'products.brand_id', '=', 'brands.id')
@@ -73,10 +59,9 @@ class FrontEndController extends Controller
                 ->where('products.active', '=', 1)
                 ->where('posts.published_date', '<=', Carbon::now()->format('Y-m-d'))
                 ->where('products.expire_date', '>=', Carbon::now()->format('Y-m-d'))
-                ->where('posts.operator_id', '=', $request->has('OpID'));
-
+                ->where('posts.operator_id', '=', $request->OpID);
         } else {
-            $products = Product::select('brands.*', 'categories.*', 'products.*', 'brands.image AS image_brand', 'categories.image AS image_category', 'products.id AS id', 'brands.id AS brand_id', 'categories.id AS category_id')
+            $products = Product::select('brands.*', 'categories.*', 'products.*', 'brands.image AS image_brand', 'categories.image AS image_category', 'products.id AS id', 'brands.id AS brand_id', 'categories.id AS category_id', 'categories.title AS category_name')
                 ->join('brands', 'products.brand_id', '=', 'brands.id')
                 ->join('categories', 'products.category_id', '=', 'categories.id')
                 ->where('products.featured', '=', 1)
@@ -88,63 +73,23 @@ class FrontEndController extends Controller
         return $products;
     }
 
-
-
-
-
-    public function du_index(Request $request)
+    public function get_brand_products(Request $request, $id)
     {
-        $enable_test = DB::table('settings')->where('key', 'like', 'enable_test')->first()->value;
-        if ($enable_test == enable_test()) {
-            $api = $this->init()[0];
-            $brands = \App\Brand::all();
-            $products = $api->get_all_categories_with_products($request);
-            $featured = $api->get_latest_featured_for_slider($request);
-            return view('front_end.home', compact('products', 'featured', 'request', 'brands'));
-        } else {
-            return view('front_end.not-found', compact('request'));
+        $brand = Brand::findOrFail($id);
+        $products = $this->join_all_table($request)->where('brand_id', $id)->get();
+        // dd($products);
+        if ($request["start"]) {
+            $view = view('front_end.brand_load', compact('products'))->render();
+            return Response(array('html' => $view, 'count' => count($products)));
         }
+        return view('front_end.brand', compact('products', 'brand', 'request'));
     }
 
-    public function consent_page(Request $request)
+    public function get_product(Request $request , $id)
     {
-        $msisdn = $request['msisdn'];
-        $operator_code = $request['op_code'];
-        return view('front_end.consent', compact('msisdn', 'operator_code'));
-    }
-
-    public function get_brand_products(Request $request)
-    {
-        $enable_test = DB::table('settings')->where('key', 'like', 'enable_test')->first()->value;
-        if ($enable_test == enable_test()) {
-            $api = $this->init()[0];
-            $products = $api->get_products_by_brandV3($request);
-            if ($request["start"]) {
-                $view = view('front_end.brand_load', compact('products'))->render();
-                return Response(array('html' => $view, 'count' => count($products)));
-            }
-            if ($products == -1) {
-                return view('front_end.not-found', compact('request'));
-            }
-
-            return view('front_end.brand', compact('products', 'request'));
-        } else {
-            return view('front_end.not-found', compact('request'));
-        }
-    }
-
-    public function get_product(Request $request)
-    {
-
-        $enable_test = DB::table('settings')->where('key', 'like', 'enable_test')->first()->value;
-        if ($enable_test == enable_test()) {
-            $api = $this->init()[0];
-            $product = $api->view_prodcut_details($request);
+            $product = $this->join_all_table($request)->where('products.id', $id)->first();
             // dd($product);
             return view('front_end.product', compact('product'));
-        } else {
-            return view('front_end.not-found', compact('request'));
-        }
     }
 
     public function products_by_category(Request $request)

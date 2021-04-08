@@ -10,14 +10,14 @@
                 <div class="featured-slider">
                     @foreach($featured as $item)
                     <div class="featured-item">
-                        <a class="thumbnail" href="{{url('get_product?product_id='.$item->product_id)}}"><img src="{{url('uploads/'.$item->product_image)}}" class="img-circle" alt=""></a>
+                        <a class="thumbnail link_href" href="{{route('product' , ['id' => $item->id])}}"><img src="{{url('uploads/'.$item->product_image)}}" class="img-circle" alt=""></a>
 
                         <div class="overlay"></div>
                         <div class="caption">
                             <div class="rating">
-                            <a href="{{url('get_product?product_id='.$item->product_id)}}">{{$item->title}}</a>/
-                                <a href="{{url('get_category?category_id='.$item->category_id)}}">{{$item->category_name}}</a>/
-                                <a href="{{url('get_brand?brand_id='.$item->brand_id)}}">{{$item->brand_name}}</a>
+                            <a href="{{route('product' , ['id' => $item->id])}}" class="link_href">{{$item->title}}</a>/
+                                <a href="{{route('category' , ['id' => $item->category_id])}}" class="link_href">{{$item->category_name}}</a>/
+                                <a href="{{route('brand' , ['id' => $item->brand_id])}}" class="link_href">{{$item->brand_name}}</a>
                             </div>
                         </div>
                     </div>
@@ -33,11 +33,11 @@
                         <ol class="brand-list">
                             @foreach($brands as $val)
                             <li class="brand-item separator-right separator-bottom">
-                                <a class="thumb" href="{{'get_brand?brand_id='.$val->id}}">
+                                <a class="thumb link_href" href="{{route('brand' , ['id' => $val->id])}}">
                                     <img src="{{url('uploads/'.$val->image)}}" class="img-circle" alt="">
                                 </a>
                                 <div class="brand-title">
-                                    <a href="{{'get_brand?brand_id='.$val->id}}" class="brand-title_reduced">{{$val->brand_name}}</a>
+                                    <a href="{{route('brand' , ['id' => $val->id])}}" class="brand-title_reduced link_href">{{$val->brand_name}}</a>
                                 </div>
                             </li>
                             @endforeach
@@ -55,10 +55,10 @@
                                 @foreach($categories as $category)
                                 <li class="product-item separator-right separator-bottom">
                                     <div class="col-xs-6">
-                                        <a class="thumb" href="{{url('get_category?category_id='.$category->id)}}"><img src="{{url('uploads/'.$category->image)}}" class="img-circle" alt=""></a>
+                                        <a class="thumb link_href" href="{{route('category' , ['id' => $category->id])}}"><img src="{{$category->image}}" class="img-circle" alt=""></a>
                                     </div>
                                     <div class="col-xs-6">
-                                        <div class="product-price"><a href="{{url('get_category?category_id='.$category->id)}}" class="product-price_reduced">{{$category->category_name}}</a>
+                                        <div class="product-price"><a href="{{route('category' , ['id' => $category->id])}}" class="product-price_reduced link_href">{{$category->title}}</a>
                                         </div>
                                     </div>
                                 </li>
