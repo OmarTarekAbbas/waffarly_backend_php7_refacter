@@ -2,9 +2,7 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes ;
 
 class Product extends Model
 {
@@ -17,7 +15,7 @@ class Product extends Model
         'active',
         'featured',
         'show_date',
-        'expire_date'
+        'expire_date',
     ];
 
     public function category()
@@ -25,21 +23,27 @@ class Product extends Model
         return $this->belongsTo('App\Category');
     }
 
-
-
     public function brand()
     {
         return $this->belongsTo('App\Brand');
     }
 
-   public function posts()
-   {
-       return $this->hasMany('App\Post', 'content_id', 'id');
-   }
-   public function operators()
+    public function posts()
+    {
+        return $this->hasMany('App\Post', 'content_id', 'id');
+    }
+    public function operators()
     {
         return $this->belongsToMany('App\Operator', 'posts', 'product_id', 'operator_id')
             ->withPivot('id', 'published_date', 'active', 'url', 'user_id')->withTimestamps();
     }
+
+    // public function scopeOperatorsOpid($builder)
+    // {
+    //     if (request()->filled("OpID")) {
+    //         return $builder->join("categories")
+    //     }
+
+    // }
 
 }

@@ -5,13 +5,19 @@ use App\Category;
 use App\Provider;
 use App\Content;
 
-function get_setting($key) {
-    $value = '';
-    $setting = Setting::where('key', $key)->first();
-    if ($setting)
-        $value = $setting->value;
-
-    return $value;
+if (! function_exists('setting')) {
+    /**
+     * Method setting
+     *
+     * @param string $key
+     *
+     * @return string
+     */
+    function setting($key)
+    {
+        $data = \DB::table('settings')->where('key', 'like', '%' . $key . '%')->first();
+        return $data ? $data->value : '';
+    }
 }
 
 function get_providers() {

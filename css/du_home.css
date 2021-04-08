@@ -1,0 +1,21 @@
+.top-navbar {
+    background: #25aae2;
+    border-bottom: 1px solid #25aae2;
+}
+a, #slide-out-right, #slide-out-right li a i.fa, #slide-out-right .collapsible-header i.fa, .top-navbar .dropdown-content li a i.fa{
+	color: #25aae2 !important;
+}
+#to-top{
+	background: #25aae2;
+}
+.loader-app{
+	background: #25aae2;
+}
+.btn, .btn-large {
+    background-color: #25aae2 !important;
+    color: #fff !important;
+}
+.current-item {
+    background: #25aae2 !important;
+    color: #56686f  !important;
+}

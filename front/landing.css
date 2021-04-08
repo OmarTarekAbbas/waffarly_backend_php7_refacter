@@ -1,0 +1,109 @@
+input[type="text"]::-webkit-input-placeholder {
+    color: #FFF;
+}
+
+header .logo-title{
+    background-image: unset !important;
+}
+.landing_page {
+    background: rgba(29, 28, 28, 0.48);
+    width: 99%;
+    margin: auto;
+    padding: 17px;
+    height: 100vh;
+}
+
+.landing_page .form_content {
+    margin: 5% auto 0 auto;
+    text-align: center;
+    display: block;
+    width: 80%;
+    direction: ltr;
+}
+
+.landing_page .form_content form .form-group label {
+    background-color: #25aae2 ;
+    color: #fff;
+    padding: 5px;
+    margin-bottom: 0;
+    display: inline;
+    border-radius: 3px;
+    margin-right: 4px;
+}
+
+.landing_page .form_content form .form-group input {
+    width: 73%;
+    display: inline;
+    color: white;
+}
+
+.landing_page .form_content .validity {
+    margin: 5px;
+    font-weight: bold;
+    position: absolute;
+    right: -5%;
+    bottom: -12%;
+    transform: translate(-50%, -50%);
+}
+
+.landing_page .form_content form .btn {
+    background-color: #874984;
+    color: #fff;
+    margin: 27px auto !important;
+    display: block;
+    width: 70%;
+    font-size: 17px;
+}
+
+header .logo-title img {
+    width: 170px;
+    position: absolute;
+    top: 66%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+.daily{
+    text-align: center;
+    color: #009fce;
+    text-shadow: 1px 2px #ffffff;
+}
+.main_container{
+    background-image: url(./BG.png);
+    background-size: 100% 100%;
+    height: 100vh;
+}
+.validity {
+    display: none;
+    margin: 5px;
+    font-weight: bold;
+  }
+ .form_content input:invalid + span::after {
+    content: "✖";
+    color: red;
+  }
+ .form_content input:valid + span::after {
+    content: "✓";
+    color: #26b72b;
+
+ }
+ .unsub{
+    color: #fff !important;
+    font-size: 16px;
+    font-weight: bold;
+ }

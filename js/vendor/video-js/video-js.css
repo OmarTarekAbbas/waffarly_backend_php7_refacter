@@ -1,0 +1,35 @@
+[12:18:08:523] [Titanium.Host] [Information] Loaded module = tiapp
+[12:18:08:524] [Titanium.Host] [Information] Loaded module = tifilesystem
+[12:18:08:528] [Titanium.Host] [Information] Loaded module = tiplatform
+[12:18:08:531] [Titanium.Host] [Information] Loaded module = tiui
+[12:18:08:534] [Titanium.Host] [Information] Loaded module = ticodec
+[12:18:08:538] [Titanium.Host] [Information] Loaded module = tidatabase
+[12:18:08:539] [Titanium.Host] [Information] Loaded module = timedia
+[12:18:08:541] [Titanium.Host] [Information] Loaded module = timonkey
+[12:18:08:572] [Titanium.Host] [Information] Loaded module = tinetwork
+[12:18:08:575] [Titanium.Host] [Information] Loaded module = tiprocess
+[12:18:08:577] [Titanium.Host] [Information] Loaded module = tiworker
+[12:18:08:578] [Titanium.JavaScript] [Information] Loading JS path=C:\Users\Dell\Downloads\SimpLESS\modules\tifilesystem\1.1.0\tifilesystemmodule.js
+[12:18:08:584] [Titanium.Host] [Information] Loaded module = tifilesystem
+[12:18:08:584] [Titanium.JavaScript] [Information] Loading JS path=C:\Users\Dell\Downloads\SimpLESS\modules\tinetwork\1.1.0\tinetworkmodule.js
+[12:18:08:594] [Titanium.Host] [Information] Loaded module = tinetwork
+[12:18:08:594] [Titanium.JavaScript] [Information] Loading JS path=C:\Users\Dell\Downloads\SimpLESS\modules\tiprocess\1.1.0\tiprocessmodule.js
+[12:18:08:596] [Titanium.Host] [Information] Loaded module = tiprocess
+[12:18:11:589] [Titanium.Host] [Notice] Received exit signal (0)
+[12:18:12:454] [Titanium.Network.Analytics] [Error] Failed for URL (https://api.appcelerator.net/p/v1/app-track): SSL connect error
+[12:18:13:385] [Titanium.Network.Analytics] [Error] Failed for URL (https://api.appcelerator.net/p/v1/app-track): SSL connect error
+[12:18:13:386] [Titanium.Host] [Notice] Unregistering: tiapp
+[12:18:13:386] [Titanium.Host] [Notice] Unregistering: tifilesystem
+[12:18:13:386] [Titanium.Host] [Notice] Unregistering: tiplatform
+[12:18:13:386] [Titanium.Host] [Notice] Unregistering: tiui
+[12:18:13:386] [Titanium.Host] [Notice] Unregistering: ticodec
+[12:18:13:386] [Titanium.Host] [Notice] Unregistering: tidatabase
+[12:18:13:386] [Titanium.Host] [Notice] Unregistering: timedia
+[12:18:13:386] [Titanium.Host] [Notice] Unregistering: timonkey
+[12:18:13:386] [Titanium.Host] [Notice] Unregistering: tinetwork
+[12:18:13:386] [Titanium.Host] [Notice] Unregistering: tiprocess
+[12:18:13:386] [Titanium.Host] [Notice] Unregistering: tiworker
+[12:18:13:386] [Titanium.Host] [Notice] Unregistering: tifilesystem
+[12:18:13:386] [Titanium.Host] [Notice] Unregistering: tinetwork
+[12:18:13:386] [Titanium.Host] [Notice] Unregistering: tiprocess
+[12:18:13:386] [Titanium.Host] [Notice] Exiting with exit code: 0

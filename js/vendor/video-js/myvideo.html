@@ -1,0 +1,90 @@
+<article class="video-container">
+    <h3>Video title</h3>
+
+    <!-- video -->
+    <div class="video-wrapper">
+        <video id="video">
+            <source src="{{asset('video/test.mp4')}}" type="video/mp4">
+            <source src="{{asset('video/test.ogv')}}" type="video/ogv">
+            <source src="{{asset('video/test.webm')}}" type="video/webm">
+            <p>
+                Your browser doesn't support HTML5 video.
+            </p>
+        </video>
+        <div class="video-overlay">
+            <div class="play-btn-xl">
+                <div class="flex-container center-center media-icon-wrapper"><span class="fa fa-play"></span></div>
+            </div>
+        </div>
+    </div>
+
+    <!--video controls -->
+    <div class="video-controls">
+        <div class="video-controls-wrapper flex-container">
+            <!-- play button -->
+            <div class="play-btn flex-col-1">
+                <span>play</span>
+            </div>
+
+            <div class="progress-bar flex-col-3">
+                <div class="seek-bar">
+                    <div class="play-bar"></div>
+                </div>
+            </div>
+
+            <div class="time-interval flex-col-1">
+                time
+            </div>
+        </div>
+    </div>
+</article><!-- end animation wrapper-->
+<script>
+    /* $(function(){
+     var videoOverlay = document.querySelectorAll('.video-overlay');
+     var playBtn = document.querySelector('.play-btn');
+     var videoControls = document.querySelector('.video-controls');
+     videoControls.style.display = 'none';
+
+     for(var i=0; i<videoOverlay.length; i++){
+     videoOverlay[i].addEventListener("click",function(){
+     var siblings = this.parentNode.childNodes;
+     var video = siblings[1];
+     console.log(siblings);
+     var currentVideoControls = this.parentNode.parentNode.childNodes[9];
+     console.log(currentVideoControls);
+
+     if(video.paused === true){
+     video.play();
+     this.style.opacity = 0;
+     currentVideoControls.style.display = 'block';
+     }else {
+     video.pause();
+     this.style.opacity = 1;
+     videoControls.style.display = 'none';
+     }
+
+     //progress bar
+     video.addEventListener('timeupdate',function(){
+     var timePercent = (this.currentTime / this.duration)*100;
+     var progressBar = document.querySelector('.play-bar');
+     progressBar.style.width = timePercent + '%';
+     });
+
+     //video controls events
+     playBtn.addEventListener("click",function(){
+     if(video.paused === true){
+     video.play();
+     videoOverlay[i].style.opacity = 0;
+     currentVideoControls.style.display = 'block';
+     }else {
+     video.pause();
+     videoOverlay[i].style.opacity = 1;
+     videoControls.style.display = 'none';
+     }
+     });
+     });
+     }
+
+     });//end ready*/
+
+</script>
