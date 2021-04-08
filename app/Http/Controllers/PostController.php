@@ -130,7 +130,7 @@ class PostController extends Controller
         }
 
         \Session::flash('success', 'post created Successfully');
-        return redirect('post');
+        return redirect('products/'.$request->product_id);
     }
 
     /**
@@ -188,7 +188,7 @@ class PostController extends Controller
             $post->update($input+['operator_id' => $request->operator_id[0], 'url' => url('view_content/'.$request->product_id.'?OpID='.$request->operator_id[0]), 'user_id' => Auth::id()]);
 
         \Session::flash('success', 'Post Update Successfully');
-            return redirect('post');
+        return redirect('products/'.$request->product_id);
     }
 
     /**

@@ -123,8 +123,8 @@ class ProductsController extends Controller
     public function show($id)
     {
       $content = Product::findOrFail($id);
-      dd($content);
-      return view('content.show_post',compact('content'));
+    //   dd($content);
+      return view('products.show_post',compact('content'));
     }
 
     /**

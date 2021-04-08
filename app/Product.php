@@ -25,20 +25,21 @@ class Product extends Model
         return $this->belongsTo('App\Category');
     }
 
-   
+
 
     public function brand()
     {
         return $this->belongsTo('App\Brand');
     }
 
-   public function operators()
-   {
-       return $this->belongsToMany('App\Operator','posts','product_id','operator_id')->wherePivot('active',1)->wherePivot('show_date','<=',Carbon::now());
-   }
    public function posts()
    {
        return $this->hasMany('App\Post', 'content_id', 'id');
    }
+   public function operators()
+    {
+        return $this->belongsToMany('App\Operator', 'posts', 'product_id', 'operator_id')
+            ->withPivot('id', 'published_date', 'active', 'url', 'user_id')->withTimestamps();
+    }
 
 }

@@ -9,9 +9,9 @@
     $post = \App\Post::where('product_id',$value->id)->count();
     ?>
     @if($post>0)
-    <a class="btn btn-sm show-tooltip" href="{{url("post?product_id=$value->id")}}" title="Posts"><i
+    <a class="btn btn-sm show-tooltip" href="{{url("products/$value->id")}}" title="Show Posts"><i
             class="fa fa-list"></i></a>
     @endif
-    <a class="btn btn-sm btn-success show-tooltip" title="" href="{{url("post/$value->id")}}"
+    <a class="btn btn-sm btn-success show-tooltip" title="" href="{{url("post/create?product_id=".$value->id."&title=".$value->title)}}"
         data-original-title="Add Post"><i class="fa fa-plus"></i></a>
 </div>

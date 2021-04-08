@@ -65,11 +65,11 @@ class Content extends Model
             ->withPivot('id', 'rbt_code')->withTimestamps();
     }
 
-    public function operators()
-    {
-        return $this->belongsToMany('App\Operator', 'posts', 'content_id', 'operator_id')
-            ->withPivot('id', 'published_date', 'active', 'url', 'user_id')->withTimestamps();
-    }
+    // public function operators()
+    // {
+    //     return $this->belongsToMany('App\Operator', 'posts', 'content_id', 'operator_id')
+    //         ->withPivot('id', 'published_date', 'active', 'url', 'user_id')->withTimestamps();
+    // }
 
     public function posts()
     {

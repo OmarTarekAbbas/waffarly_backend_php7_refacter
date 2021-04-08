@@ -1,9 +1,9 @@
-@if(isset($_REQUEST['content_id']))
+@if(isset($_REQUEST['product_id']))
 <div class="form-group">
     <label for="textfield5" class="col-sm-3 col-lg-2 control-label">Content<span class="text-danger">*</span></label>
     <div class="col-sm-9 col-lg-10 controls">
         <select  name="product_id" class="form-control chosen-rtl">
-            <option id="category_{{ $_REQUEST['content_id'] }}" value="{{ $_REQUEST['content_id'] }}">{{ $_REQUEST['title']}}</option>
+            <option id="category_{{ $_REQUEST['product_id'] }}" value="{{ $_REQUEST['product_id'] }}">{{ $_REQUEST['title']}}</option>
         </select>
     </div>
 </div>
