@@ -58,7 +58,7 @@
             if (record.category_id) {
 
                 if(record.operator_id){
-                    var opId = '&OpID='+record.operator_id ;
+                    var opId = '?OpID='+record.operator_id ;
                 }else{
                     var opId =  "";
                 }

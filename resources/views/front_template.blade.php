@@ -259,11 +259,14 @@
                 <div class="line-separator"></div>
             </li>
             <li><a href="{{route('terms')}}" class="link_href"><i class="fa fa-edit"></i> الارشادات</a></li>
-            @if (Session::has('MSISDN_ETISALAT') && Session::get('Status') == 'active')
-                <li><a href="{{url('logout_web')}}" class="link_href"><i class="fa fa-sign-out"></i> خروج</a></li>
-            @else
-                <li><a href="{{url(Etisalat_Bundle_Route .'/login_web')}}" class="link_href"><i class="fa fa-sign-in"></i> دخول</a></li>
-            @endif
+                @if (request()->get('OpID') == Etisalat_Bundle_Route)
+                    @if (Session::has('MSISDN_ETISALAT') && Session::get('Status') == 'active')
+                    <li><a href="{{url('logout_web')}}" class="link_href"><i class="fa fa-sign-out"></i> خروج</a></li>
+                    @else
+                    <li><a href="{{url(Etisalat_Bundle_Route .'/login_web')}}" class="link_href"><i
+                                class="fa fa-sign-in"></i> دخول</a></li>
+                    @endif
+                @endif
         </ul>
     </div>
 

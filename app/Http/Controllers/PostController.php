@@ -115,7 +115,7 @@ class PostController extends Controller
         $content = Product::findOrFail($request->product_id);
 
         foreach ($request->operator_id as $operator_id) {
-            $operator = $content->operators()->attach([$operator_id => ['url' => url('view_content/' . $request->product_id . '?OpID=' . $operator_id),
+            $operator = $content->operators()->attach([$operator_id => ['url' => url('product/' . $request->product_id . '?OpID=' . $operator_id),
                 'published_date' => $request->published_date, 'active' => $request->active, 'user_id' => Auth::user()->id]]);
         }
 
@@ -125,7 +125,7 @@ class PostController extends Controller
         //dd($random);
         foreach ($posts as $post) {
             Post::find($post->id)->update([
-                'url' => url('view_content/' . $request->product_id . '?OpID=' . $post->operator_id),
+                'url' => url('product/' . $request->product_id . '?OpID=' . $post->operator_id),
             ]);
         }
 
@@ -185,7 +185,7 @@ class PostController extends Controller
             $input = $request->only('published_date', 'active', 'product_id');
             $post = Post::findOrFail($id);
             // $content = Content::findOrFail($request->product_id);
-            $post->update($input+['operator_id' => $request->operator_id[0], 'url' => url('view_content/'.$request->product_id.'?OpID='.$request->operator_id[0]), 'user_id' => Auth::id()]);
+            $post->update($input+['operator_id' => $request->operator_id[0], 'url' => url('product/'.$request->product_id.'?OpID='.$request->operator_id[0]), 'user_id' => Auth::id()]);
 
         \Session::flash('success', 'Post Update Successfully');
         return redirect('products/'.$request->product_id);

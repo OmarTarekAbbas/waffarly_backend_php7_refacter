@@ -14,7 +14,6 @@ use App\Product;
 use App\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use Monolog\Handler\StreamHandler;
@@ -47,13 +46,11 @@ class FrontEndController extends Controller
         return view('front_end.home', compact('products', 'featured', 'request', 'brands', 'categories'));
     }
 
-
-
     public function get_brand_products(Request $request, $id)
     {
         $brand = Brand::findOrFail($id);
         $products = $this->join_all_table($request)->where('brand_id', $id)->paginate(10);
-        if($request->ajax()) {
+        if ($request->ajax()) {
             if (count($products) > 0) {
                 $html = view('front_end.brand_load', compact('products'))->render();
             } else {
@@ -68,15 +65,24 @@ class FrontEndController extends Controller
     public function get_product(Request $request, $id)
     {
         $product = $this->join_all_table($request)->where('products.id', $id)->first();
-
-        return view('front_end.product', compact('product'));
+        if (request()->get('OpID') == Etisalat_Bundle_Route) {
+            if (Session::has('MSISDN_ETISALAT') && Session::get('Status') == 'active') {
+                return view('front_end.product', compact('product'));
+            } else {
+                $URL = $request->fullUrl();
+                Session::put('RUrl',$URL);
+                return redirect(url(Etisalat_Bundle_Route . '/login_web'));
+            }
+        } else {
+            return view('front_end.product', compact('product'));
+        }
     }
 
     public function products_by_category(Request $request, $id)
     {
         $category = Category::findOrFail($id);
         $products = $this->join_all_table($request)->where('category_id', $id)->paginate(10);
-        if($request->ajax()) {
+        if ($request->ajax()) {
             if (count($products) > 0) {
                 $html = view('front_end.category_load', compact('products'))->render();
             } else {
@@ -90,8 +96,8 @@ class FrontEndController extends Controller
 
     public function search_view(Request $request)
     {
-            $results = array();
-            return view('front_end.search', compact('results', 'request'));
+        $results = array();
+        return view('front_end.search', compact('results', 'request'));
     }
 
     public function search(Request $request)
@@ -100,22 +106,25 @@ class FrontEndController extends Controller
         $products = $this->join_all_table($request)->where('categories.title', 'LIKE', '%' . $keyword . '%')->get();
         $brands = $this->join_all_table($request)->where('brand_name', 'LIKE', '%' . $keyword . '%')->get();
         $pr = $this->join_all_table($request)->where('products.title', 'LIKE', '%' . $keyword . '%')->get();
-        if (count($pr) > 0)
+        if (count($pr) > 0) {
             return $pr;
-        if (count($brands) > 0)
+        }
+
+        if (count($brands) > 0) {
             return $brands;
-        if (count($products) > 0)
+        }
+
+        if (count($products) > 0) {
             return $products;
+        }
+
         // return $results;
     }
-
 
     public function terms(Request $request)
     {
         return view('front_end.terms');
     }
-
-
 
     public function join_all_table(Request $request)
     {
@@ -142,7 +151,6 @@ class FrontEndController extends Controller
         }
         return $products;
     }
-
 
     public function login(Request $request)
     {

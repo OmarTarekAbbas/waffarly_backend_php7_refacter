@@ -1,14 +1,13 @@
 <?php
 
 use App\Brand;
-use App\Setting;
 use App\Category;
-use App\Provider;
-use App\Content;
 use App\Country;
 use App\Operator;
+use App\Provider;
+use App\Setting;
 
-if (! function_exists('setting')) {
+if (!function_exists('setting')) {
     /**
      * Method setting
      *
@@ -23,14 +22,16 @@ if (! function_exists('setting')) {
     }
 }
 
-function get_providers() {
+function get_providers()
+{
 
     $providers = null;
     $providers = Provider::where('title', 'not like', '%دليل المسلم%')->get();
     return $providers;
 }
 
-function provider_service($id) {
+function provider_service($id)
+{
 
     $services = $id;
     $services = Category::where('provider_id', $id)->get();
@@ -44,7 +45,8 @@ function provider_service($id) {
 //     return $services;
 // }
 
-function general_service() {
+function general_service()
+{
 
     $generalProvider = Provider::where('title', 'like', '%دليل المسلم%')->first();
     $generalService = null;
@@ -54,23 +56,45 @@ function general_service() {
     return $generalService;
 }
 
-function Etisalat(){
+function Etisalat()
+{
     $country = Country::where('title', 'egypt')->first();
-    if(!empty($country)){
+    if (!empty($country)) {
         $op = Operator::where('country_id', $country->id)->where('name', 'etisalat')->first();
-        if(!empty($op)){
+        if (!empty($op)) {
             return $op->id;
         }
     }
     return 4;
-  }
+}
 
-  function categories(){
-    $categories = Category::get(['id','title']);
+function categories()
+{
+    $categories = Category::get(['id', 'title']);
     return $categories;
-  }
+}
 
-  function brands(){
-    $brands = Brand::get(['id','brand_name']);
+function brands()
+{
+    $brands = Brand::get(['id', 'brand_name']);
     return $brands;
-  }
+}
+
+function etisalat_crypt($string, $action = 'e')
+{
+
+    $output = false;
+    $encrypt_method = "aes-128-cbc";
+    $key = 'IV98723000ZDFrtx';
+    $iv = str_repeat(chr(0), 16);
+
+    if ($action == 'e') {
+        $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+    } else if ($action == 'd') {
+        $output = openssl_decrypt($string, $encrypt_method, $key, 0, $iv);
+        $output_array = explode("&user", $output);
+        $output = $output_array[1];
+    }
+
+    return $output;
+}

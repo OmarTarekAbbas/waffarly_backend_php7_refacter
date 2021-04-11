@@ -14,8 +14,9 @@
                     <h3 class="productName"><a
                             href="{{route('product' , ['id' => $product->id])}}" class="link_href">{{$product->title}}</a>
                     </h3>
-                    <a class="maleo-blog_thumb"
-                        href="{{route('product' , ['id' => $product->id])}}" class="link_href"><img
+                    <a class="maleo-blog_thumb link_href"
+                        href="{{route('product' , ['id' => $product->id])}}" >
+                        <img
                             src="{{url('uploads/'.$product->product_image)}}" class="img-circle" alt=""></a>
                     <div class="maleo-blog_rightcontent">
                         <h3 class="blog-title"><a
