@@ -77,39 +77,39 @@ class FrontEndController extends Controller
     {
         $brand = Brand::findOrFail($id);
         $products = $this->join_all_table($request)->where('brand_id', $id)->get();
-        // dd($products);
         if ($request["start"]) {
-            $view = view('front_end.brand_load', compact('products'))->render();
-            return Response(array('html' => $view, 'count' => count($products)));
+            if (count($products) > 0) {
+                $html = view('front_end.brand_load', compact('products'))->render();
+            } else {
+                $html = "";
+            }
+            return Response(array('html' => $html));
         }
+
         return view('front_end.brand', compact('products', 'brand', 'request'));
     }
 
-    public function get_product(Request $request , $id)
+    public function get_product(Request $request, $id)
     {
-            $product = $this->join_all_table($request)->where('products.id', $id)->first();
-            // dd($product);
-            return view('front_end.product', compact('product'));
+        $product = $this->join_all_table($request)->where('products.id', $id)->first();
+        
+        return view('front_end.product', compact('product'));
     }
 
-    public function products_by_category(Request $request)
+    public function products_by_category(Request $request, $id)
     {
-        $enable_test = DB::table('settings')->where('key', 'like', 'enable_test')->first()->value;
-        if ($enable_test == enable_test()) {
-            $api = $this->init()[0];
-            $products = $api->get_products_by_categories_V2($request);
-            if ($request["start"]) {
-                $view = view('front_end.category_load', compact('products'))->render();
-                return Response(array('html' => $view, 'count' => count($products)));
+        $category = Category::findOrFail($id);
+        $products = $this->join_all_table($request)->where('category_id', $id)->get();
+        if ($request["start"]) {
+            if (count($products) > 0) {
+                $html = view('front_end.category_load', compact('products'))->render();
+            } else {
+                $html = "";
             }
-            if ($products == -1) {
-                return view('front_end.not-found', compact('request'));
-            }
-
-            return view('front_end.category', compact('products', 'request'));
-        } else {
-            return view('front_end.not-found', compact('request'));
+            return Response(array('html' => $html));
         }
+        return view('front_end.category', compact('products', 'request'));
+
     }
 
     public function search_view(Request $request)

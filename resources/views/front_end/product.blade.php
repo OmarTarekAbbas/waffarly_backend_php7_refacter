@@ -4,6 +4,7 @@
             @extends('top_navbar')
             <div class="content-container">
                 <!-- HERE IS CONTENTS -->
+                @if(isset($product) && $product!=null)
                 <div class="pages product-page">
                     <div class="maleo-card product-single animated fadeInUp">
                     <div class="product-price"><h3>{{$product->title}}</h3></div>
@@ -15,6 +16,9 @@
                         </div>
                     </div>
                 </div>
+                @else
+                <h1 style="text-align: center; margin-top: 10%;">لا يوجد منتج</h1>
+                @endif
                 <!-- //HERE IS CONTENTS -->
             </div>
         </div>
