@@ -66,13 +66,17 @@ provider
                                                 <a class="btn btn-sm show-tooltip"
                                                     href='{{url("provider/$value->id/edit")}}' title="Edit"><i
                                                         class="fa fa-edit"></i></a>
-                                                <form action="{{ url('provider/'.$value->id.'/delete')}}"
+{{--
+    <form action="{{ url('provider/'.$value->id.'/delete')}}"
                                                     method="GET" style="display: initial;">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="DELETE" />
                                                     <button type="submit" class="btn btn-sm btn-danger"
                                                         style="height: 28px;"><i class="fa fa-trash"></i></button>
                                                 </form>
+ --}}
+
+
                                                 @if(count($value->categories) > 0)
                                                 <a class="btn btn-sm show-tooltip show-tooltip"
                                                 href="{{url("provider/$value->id")}}" title="category"><i
