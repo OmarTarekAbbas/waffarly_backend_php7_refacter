@@ -26,7 +26,7 @@
             if (input.value != "")
             {
                 <?php
-                        if (!isset($_GET['operator_id']))
+                        if (!isset($_GET['OpID']))
                         {
                 ?>
                             $.get('search_result?keyword='+input.value,function (results) {
@@ -38,7 +38,7 @@
                         }
                         else{
                 ?>
-                            $.get('search_result?keyword='+input.value+'&operator_id='+'<?php echo $_GET['operator_id'] ?>',function (results) {
+                            $.get('search_result?keyword='+input.value+'&OpID='+'<?php echo $_GET['OpID'] ?>',function (results) {
                                 $('#outter_div').html('');
                                 results.forEach(append_search_result) ;
                             });
@@ -58,18 +58,18 @@
             if (record.category_id) {
 
                 if(record.operator_id){
-                    var opId = '&operator_id='+record.operator_id ;
+                    var opId = '&OpID='+record.operator_id ;
                 }else{
                     var opId =  "";
                 }
 
                 var str = '<div class="maleo-card maleo-blog_small margin-bottom_low animated fadeInUp">\
-                        <h3 class="blog-title prod"><a style="  color: #fff !important;" href="{{url('get_product?product_id=')}}' + record.product_id +opId+ '" > ' + record.title + ' </a></h3>\
-                        <div class="maleo-blog_thumb"><a href="{{url('get_product?product_id=')}}' + record.product_id +opId+ '" ><img  class="img-circle" src="{{url("")}}/uploads/' + record.product_image + '" alt=""></a></div>\
+                        <h3 class="blog-title prod"><a style="  color: #fff !important;" href="{{url('product')}}' +'/'+ record.id +opId+ '" > ' + record.title + ' </a></h3>\
+                        <div class="maleo-blog_thumb"><a href="{{url('product')}}' +'/'+ record.id +opId+ '" ><img  class="img-circle" src="{{url("")}}/uploads/' + record.product_image + '" alt=""></a></div>\
                         <div class="maleo-blog_rightcontent">\
                         <h3 class="blog-title">\
-                        <a href="{{url('get_category?category_id=')}}' + record.category_id +opId+ '">' + record.category_name + '</a> /\
-                        <a href="{{url('get_brand?brand_id=')}}' + record.brand_id + opId+'">' + record.brand_name + '</a>\
+                        <a href="{{url('category')}}' +'/'+ record.category_id +opId+ '">' + record.category_name + '</a> /\
+                        <a href="{{url('brand')}}' +'/'+ record.brand_id + opId+'">' + record.brand_name + '</a>\
                         </h3>\
                         </div>\
                         </div>';

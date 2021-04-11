@@ -22,7 +22,7 @@
                 </div>
             </div>
             @empty
-            <h1 style="text-align: center; margin-top: 10%;">لا يوجد منتج</h1>
+            @include("front_end.not-found")
             @endforelse
 
 
@@ -36,7 +36,7 @@
 @stop
 @section('script2')
 <script>
-var start = 0;
+var start = 1;
 var action = 'inactive';
 $('.load').hide();
 $(window).on("scroll", function() {
@@ -55,9 +55,9 @@ $(window).on("scroll", function() {
 function load_country_data(start) {
         var opid = "{{request()->get('OpID')}}";
         if (opid) {
-            var url = window.location.href + "&start=" + start
+            var url = window.location.href + "&page=" + start
         }else{
-            var url = window.location.href + "?start=" + start
+            var url = window.location.href + "?page=" + start
         }
     $.ajax({
         type: 'GET',

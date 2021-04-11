@@ -232,15 +232,11 @@
                         class="angle-left fa fa-angle-left"></span></a>
                 <div class="collapsible-body submenu" style="display: none">
                     <ul>
-                        @isset($categories)
-
-                                @foreach($categories as $category)
+                                @foreach(categories() as $category)
                                     <li><a
                                             href="{{route('category' , ['id' => $category->id])}}" class="link_href">{{$category->title}}</a>
                                     </li>
                                 @endforeach
-
-                        @endisset
                     </ul>
                 </div>
             </li>
@@ -249,15 +245,13 @@
                         class="angle-left fa fa-angle-left"></span></a>
                 <div class="collapsible-body submenu" style="display: none">
                     <ul>
-                        @isset($brands)
-                        @foreach($brands as $val)
+                        @foreach(brands() as $val)
                             <li class="brand-item separator-right separator-bottom">
                                 <div class="brand-title">
                                     <a href="{{route('brand' , ['id' => $val->id])}}" class="brand-title_reduced link_href">{{$val->brand_name}}</a>
                                 </div>
                             </li>
                         @endforeach
-                        @endisset
                     </ul>
                 </div>
             </li>

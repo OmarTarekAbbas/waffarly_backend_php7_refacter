@@ -1,5 +1,6 @@
 <?php
 
+use App\Brand;
 use App\Setting;
 use App\Category;
 use App\Provider;
@@ -62,4 +63,14 @@ function Etisalat(){
         }
     }
     return 4;
+  }
+
+  function categories(){
+    $categories = Category::get(['id','title']);
+    return $categories;
+  }
+
+  function brands(){
+    $brands = Brand::get(['id','brand_name']);
+    return $brands;
   }

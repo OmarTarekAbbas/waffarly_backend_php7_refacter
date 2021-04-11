@@ -47,6 +47,76 @@ class FrontEndController extends Controller
         return view('front_end.home', compact('products', 'featured', 'request', 'brands', 'categories'));
     }
 
+
+
+    public function get_brand_products(Request $request, $id)
+    {
+        $brand = Brand::findOrFail($id);
+        $products = $this->join_all_table($request)->where('brand_id', $id)->paginate(10);
+        if($request->ajax()) {
+            if (count($products) > 0) {
+                $html = view('front_end.brand_load', compact('products'))->render();
+            } else {
+                $html = "";
+            }
+            return Response(array('html' => $html));
+        }
+
+        return view('front_end.brand', compact('products', 'brand', 'request'));
+    }
+
+    public function get_product(Request $request, $id)
+    {
+        $product = $this->join_all_table($request)->where('products.id', $id)->first();
+
+        return view('front_end.product', compact('product'));
+    }
+
+    public function products_by_category(Request $request, $id)
+    {
+        $category = Category::findOrFail($id);
+        $products = $this->join_all_table($request)->where('category_id', $id)->paginate(10);
+        if($request->ajax()) {
+            if (count($products) > 0) {
+                $html = view('front_end.category_load', compact('products'))->render();
+            } else {
+                $html = "";
+            }
+            return Response(array('html' => $html));
+        }
+        return view('front_end.category', compact('products', 'request'));
+
+    }
+
+    public function search_view(Request $request)
+    {
+            $results = array();
+            return view('front_end.search', compact('results', 'request'));
+    }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->get('keyword');
+        $products = $this->join_all_table($request)->where('categories.title', 'LIKE', '%' . $keyword . '%')->get();
+        $brands = $this->join_all_table($request)->where('brand_name', 'LIKE', '%' . $keyword . '%')->get();
+        $pr = $this->join_all_table($request)->where('products.title', 'LIKE', '%' . $keyword . '%')->get();
+        if (count($pr) > 0)
+            return $pr;
+        if (count($brands) > 0)
+            return $brands;
+        if (count($products) > 0)
+            return $products;
+        // return $results;
+    }
+
+
+    public function terms(Request $request)
+    {
+        return view('front_end.terms');
+    }
+
+
+
     public function join_all_table(Request $request)
     {
         if ($request->has('OpID')) {
@@ -73,70 +143,6 @@ class FrontEndController extends Controller
         return $products;
     }
 
-    public function get_brand_products(Request $request, $id)
-    {
-        $brand = Brand::findOrFail($id);
-        $products = $this->join_all_table($request)->where('brand_id', $id)->get();
-        if ($request["start"]) {
-            if (count($products) > 0) {
-                $html = view('front_end.brand_load', compact('products'))->render();
-            } else {
-                $html = "";
-            }
-            return Response(array('html' => $html));
-        }
-
-        return view('front_end.brand', compact('products', 'brand', 'request'));
-    }
-
-    public function get_product(Request $request, $id)
-    {
-        $product = $this->join_all_table($request)->where('products.id', $id)->first();
-        
-        return view('front_end.product', compact('product'));
-    }
-
-    public function products_by_category(Request $request, $id)
-    {
-        $category = Category::findOrFail($id);
-        $products = $this->join_all_table($request)->where('category_id', $id)->get();
-        if ($request["start"]) {
-            if (count($products) > 0) {
-                $html = view('front_end.category_load', compact('products'))->render();
-            } else {
-                $html = "";
-            }
-            return Response(array('html' => $html));
-        }
-        return view('front_end.category', compact('products', 'request'));
-
-    }
-
-    public function search_view(Request $request)
-    {
-        $enable_test = DB::table('settings')->where('key', 'like', 'enable_test')->first()->value;
-        if ($enable_test == enable_test()) {
-            $results = array();
-            return view('front_end.search', compact('results', 'request'));
-        } else {
-            return view('front_end.not-found', compact('request'));
-        }
-    }
-
-    public function search(Request $request)
-    {
-        $api = $this->init()[0];
-        $results = $api->SearchByKeyword($request);
-        return $results;
-    }
-
-    public function terms(Request $request)
-    {
-        $api = $this->init()[0];
-        $request['key'] = "Terms";
-        $result = $api->get_setting($request);
-        return view('front_end.terms', compact('result', 'request'));
-    }
 
     public function login(Request $request)
     {

@@ -11,7 +11,7 @@
                         </div>
                         <div class="blog-content">
                             <div class="terms">
-                                {!! $result->value !!}
+                                {!! setting('Terms') !!}
                             </div>
                         </div>
                     </div>

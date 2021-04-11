@@ -16,7 +16,7 @@
                 <div class="pages not-found-page">
                     <div class="not-found animated fadeIn">
                         <h2>لا يوجد منتجات.</h2>
-                        <div class="btn-to-home"><a href="{{url('/')}}" class="btn"><i class="fa fa-home"></i> الرجوع للرئيسية</a></div>
+                        <div class="btn-to-home"><a href="{{url('/')}}" class="btn link_href"><i class="fa fa-home"></i> الرجوع للرئيسية</a></div>
                     </div>
                 </div>
                 <!-- //HERE IS CONTENTS -->

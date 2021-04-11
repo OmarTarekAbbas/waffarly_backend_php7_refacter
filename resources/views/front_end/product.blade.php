@@ -11,8 +11,8 @@
                         <div class="thumb"><img src="{{url('uploads/'.$product->product_image)}}" class="img-circle" alt=""></div>
                         <!-- Product header contain product name, price & rating-->
                         <div class="product-header">
-                        <div class="product-price"><a href="{{route('brand' , ['id' => $product->brand_id])}}" class="product-price_reduced">{{$product->brand_name}}</a></div>
-                                <div class="product-price"><a href="{{route('category' , ['id' => $product->category_id])}}" class="product-price_reduced">{{$product->category_name}}</a></div>
+                        <div class="product-price"><a href="{{route('brand' , ['id' => $product->brand_id])}}" class="product-price_reduced link_href">{{$product->brand_name}}</a></div>
+                                <div class="product-price"><a href="{{route('category' , ['id' => $product->category_id])}}" class="product-price_reduced link_href">{{$product->category_name}}</a></div>
                         </div>
                     </div>
                 </div>

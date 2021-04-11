@@ -23,7 +23,7 @@ Route::get('brand/{id}', 'FrontEndController@get_brand_products')->name('brand')
 Route::get('product/{id}', 'FrontEndController@get_product')->name('product');
 Route::get('search', 'FrontEndController@search_view')->name('search');
 Route::get('search_result', 'FrontEndController@search');
-Route::get('terms', 'DuController@terms')->name('terms');
+Route::get('terms', 'FrontEndController@terms')->name('terms');
 });
 
 // constant
